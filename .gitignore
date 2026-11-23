@@ -1,0 +1,21 @@
+# Build artifacts
+/garm-provider-vultr
+/garm-provider-vultr.exe
+/bin/
+/build/
+
+# Local provider configuration (may contain an API key)
+/garm-provider-vultr.toml
+*.local.toml
+
+# Go test and coverage output
+*.test
+*.out
+coverage
+coverage.txt
+
+# Editor and OS noise
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,70 @@
+# Example configuration for garm-provider-vultr.
+#
+# Copy this to /etc/garm/garm-provider-vultr.toml and point the GARM provider
+# section at it with config_file. Keep the file readable only by the user GARM
+# runs as: chmod 0600 /etc/garm/garm-provider-vultr.toml
+
+# A Vultr API key with permission to manage instances.
+#
+# Leave this empty to read the key from the VULTR_API_KEY environment variable
+# instead, and list that variable in the GARM provider section:
+#
+#   [provider.external]
+#     environment_variables = ["VULTR_API_KEY"]
+#
+# An explicit value here takes precedence over the environment variable.
+api_key = ""
+
+# The Vultr region runners are created in. Read the current region ids from
+# GET /v2/regions.
+region = "ewr"
+
+# Everything below is optional. Each value is a default that a pool can
+# override through extra_specs.
+
+# Vultr SSH key ids installed on every runner. See GET /v2/ssh-keys.
+# sshkey_ids = ["00000000-0000-0000-0000-000000000000"]
+
+# Vultr firewall group attached to every runner. See GET /v2/firewalls.
+# firewall_group_id = "00000000-0000-0000-0000-000000000000"
+
+# A Vultr startup script run on every runner. The GARM runner bootstrap is
+# delivered through cloud-init user data, not through this.
+# script_id = "00000000-0000-0000-0000-000000000000"
+
+# Assign an IPv6 address to every runner.
+# enable_ipv6 = false
+
+# Do not assign a public IPv4 address. This requires enable_ipv6, because a
+# runner with no address cannot reach the GARM callback URL.
+# disable_public_ipv4 = false
+
+# Attach a single VPC, creating one in the region if none exists. Use vpc_ids
+# when the region has more than one VPC.
+# enable_vpc = false
+
+# VPC ids attached to every runner. Takes precedence over enable_vpc.
+# vpc_ids = ["00000000-0000-0000-0000-000000000000"]
+
+# Create runners without a public interface. This requires vpc_ids, and the
+# first VPC in the list must have a NAT gateway attached, otherwise the runner
+# has no route to GitHub or to GARM.
+# vpc_only = false
+
+# Enable Vultr DDoS protection. Vultr charges extra for this.
+# ddos_protection = false
+
+# Vultr automatic backups. Runners are disposable, so this is normally left
+# unset. Valid values are "enabled" and "disabled".
+# backups = "disabled"
+
+# The login user Vultr configures on Linux instances: "root" or "limited".
+# user_scheme = "root"
+
+# Extra Vultr tags added to every runner, next to the tags the provider uses
+# to identify its own instances.
+# tags = ["team-platform"]
+
+# Override the Vultr API endpoint. Leave this unset in normal use; it exists
+# for testing and for deployments that proxy the API.
+# base_url = "https://api.vultr.com"
